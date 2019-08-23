@@ -1,14 +1,44 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Encuesta</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" offset="0"
+               size-md="8" offset-md="2"
+               size-xl="6" offset-xl="3"
+               padding>
+        <h1 class="ion-text-uppercase">
+          <strong>Instrucciones</strong>
+        </h1>
+        <p>
+          Este cuestionario es sobre las ideas y sentimientos que tienes de tus relaciones personales y
+          familiares. Tanto del presente, como de tu infancia. El cuestionario tiene tres tipos de frases:
+        </p>
+        <ul>
+          <li class="ion-padding-bottom">
+            Frases que se refieren a lo que has vivido en tu familia de origen. Estas frases están
+            generalmente formuladas en tiempo pasado, o si no, mencionan claramente palabras como
+            “niño-a”, “padre” o “familia de origen”.
+          </li>
+          <li class="ion-padding-bottom">
+            Frases que describen tus experiencias en tu familia o en tu pareja actual. Estas frases
+            hablan generalmente de “mis seres queridos” y están siempre formuladas en tiempo
+            presente (la familia actual puede ser la familia de origen).
+          </li>
+          <li>
+            Frases que se refieren al funcionamiento y valores familiares.
+          </li>
+        </ul>
+        <p><strong>Los resultados de este cuestionario son confidenciales</strong></p>
+        <ion-button fill="clear" class="ion-float-right" [routerLink]="['/first-step']">
+          Comenzar
+          <ion-icon slot="end" name="ios-arrow-forward"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
