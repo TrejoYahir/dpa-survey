@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -12,6 +12,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import {StepGuard} from './guards/step.guard';
+import {QuizService} from './services/quiz.service';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+
+export function onInit(quizService: QuizService) {
+  return () => quizService.getSavedSession();
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,13 +27,21 @@ import { environment } from '../environments/environment';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
   ],
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: onInit,
+      deps: [QuizService],
+      multi: true
+    },
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    StepGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="toolbar-title">
+      <img src="/assets/img/logo.png" class="title-logo">
+      <span class="title-text">Encuesta (Paso 2/2)</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" offset="0"
+               size-xl="8" offset-xl="2"
+               padding class="ion-text-justify">
+        <p>
+          Por razones estadísticas, en esta etapa
+          <strong>tienes que poner un número determinado de frases en cada clasificación</strong>
+        </p>
+        <p>
+          Empieza por la categoría <strong>Muy verdadero</strong> vuelve a ver
+          todas las frases de esta categoría para dejar sólo las 12 que, aplicadas a ti, te parezcan
+          "muy verdaderas". Si tienes más de 12 frases, deberás entonces poner las sobrantes
+          en la categoría <strong>Verdadero</strong>. Si, por el contrario, en la categoría <strong>Muy verdadero</strong>,
+          hay menos de 12 frases, deberás mezclarlas con las de la categoría <strong>Verdadero</strong> y elegir entre
+          todas ellas las 12 frases más características.
+        </p>
+        <p>
+          Luego sigue el mismo procedimiento para la categoría <strong>Verdadero</strong> (15 frases). Si te faltan frases
+          para completar las 15, toma de la categoría <strong>Ni verdadero, ni falso</strong>,
+          aquellas que pueden pasar a <strong>Verdadero</strong>. Si, por el contrario te sobran, pasa algunas a la categoría
+          <strong>Ni verdadero, ni falso</strong>
+        </p>
+        <p>
+          Has lo mismo para la categoría <strong>Muy falso</strong> (12 frases), siguiendo por
+          la categoría, <strong>Falso</strong> (15 frases) y terminando con <strong>Ni verdadero, ni falso</strong>.
+          Cuando hayas terminado, comprueba que la categoría <strong>Ni verdadero, ni falso</strong> contenga 18 frases.
+        </p>
+        <img src="/assets/img/example.png" class="step-example ion-margin-top">
+      </ion-col>
+      <ion-col size="12" offset="0"
+               size-xl="8" offset-xl="2"
+               padding>
+        <div class="category" *ngFor="let category of categories">
+          <div class="category-header" (click)="toggleCategory(category)">
+            <h1 [style.color]="category.option.color">
+              <span>{{category.option.text}} ({{category.items.length}}/{{category.option.limit}})</span>
+              <ion-icon [name]="category.expanded ? 'arrow-dropdown' : 'arrow-dropup'"></ion-icon>
+            </h1>
+            <ion-badge color="danger" *ngIf="category.items.length !== category.option.limit">
+              <span *ngIf="category.items.length < category.option.limit">Faltan </span>
+              <span *ngIf="category.items.length > category.option.limit">Sobran </span>
+              <span>elementos</span>
+            </ion-badge>
+            <ion-badge color="success" *ngIf="category.items.length === category.option.limit">
+              <span>Completo</span>
+            </ion-badge>
+          </div>
+          <ion-list *ngIf="category.expanded">
+            <ion-item *ngFor="let item of category.items">
+              <div class="item-content">
+                <p class="item-text">{{item.text}}</p>
+                <div class="button-container">
+                  <button class="move-button" (click)="changeCategory(category, item, move)"
+                          [style.backgroundColor]="move.color"
+                          *ngFor="let move of category.option.canMoveTo">
+                    Mover a <span class="ion-text-lowercase">{{move.text}}</span>
+                  </button>
+                </div>
+              </div>
+            </ion-item>
+          </ion-list>
+        </div>
+        <ion-button fill="clear" class="ion-float-right" (click)="sendResults()">
+          Terminar
+          <ion-icon slot="end" name="ios-arrow-forward"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

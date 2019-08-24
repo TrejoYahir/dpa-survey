@@ -1,0 +1,53 @@
+.step-example {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 450px;
+  display: block;
+}
+
+.category-header {
+  width: 100%;
+  cursor: pointer;
+  h1 {
+    * {
+      vertical-align: middle;
+    }
+  }
+}
+
+.item-content {
+  width: 100%;
+  display: block;
+  .button-container {
+    min-width: 100%;
+    width: 100%;
+    text-align: left;
+    .move-button {
+      outline: 0 none;
+      text-transform: none!important;
+      padding: 6px 16px;
+      margin: 8px;
+      border-radius: 12px;
+      color: white;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+
+  .item-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .button-container {
+      min-width: 415px;
+      text-align: right;
+      .move-button {
+        margin: 0 8px;
+      }
+    }
+  }
+
+}

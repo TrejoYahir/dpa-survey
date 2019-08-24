@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Encuesta</ion-title>
+    <ion-title class="toolbar-title">
+      <img src="/assets/img/logo.png" class="title-logo">
+      <span class="title-text">Encuesta</span>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -34,7 +37,7 @@
           </li>
         </ul>
         <p><strong>Los resultados de este cuestionario son confidenciales</strong></p>
-        <ion-button fill="clear" class="ion-float-right" [routerLink]="['/first-step']">
+        <ion-button fill="clear" class="ion-float-right" (click)="startQuiz()">
           Comenzar
           <ion-icon slot="end" name="ios-arrow-forward"></ion-icon>
         </ion-button>
