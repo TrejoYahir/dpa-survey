@@ -49,6 +49,10 @@ export class SecondStepPage implements OnInit {
   changeCategory(category: any, item: any, move: any) {
     category.items = category.items.filter(x => x.id !== item.id);
     const newCategory = this.categories.find(x => x.option.value === move.value);
+    item.answer.value = move.value;
+    item.answer.text = move.text;
+    item.answer.id = move.value;
+
     newCategory.items.push(item);
   }
 

@@ -1,0 +1,15 @@
+.dpa-table {
+  display: inline-block;
+  border: 1px solid var(--ion-color-primary);
+  th {
+    background-color: var(--ion-color-primary);
+    color: white;
+  }
+  td:first-of-type {
+    font-weight: bold;
+  }
+  td, th {
+    border: 1px solid var(--ion-color-primary);
+    padding: .5rem 1rem;
+  }
+}

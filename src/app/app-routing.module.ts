@@ -9,6 +9,9 @@ const routes: Routes = [
   { path: 'first-step', loadChildren: './home/first-step/first-step.module#FirstStepPageModule' },
   { path: 'second-step', loadChildren: './home/second-step/second-step.module#SecondStepPageModule', canActivate: [StepGuard] },
   { path: 'thank-you', loadChildren: './home/thank-you/thank-you.module#ThankYouPageModule', canActivate: [FinishGuard] },
+  { path: 'terms', loadChildren: './terms/terms.module#TermsPageModule' },
+  { path: 'results', loadChildren: './results/results.module#ResultsPageModule' },
+  { path: 'results/detail/:id', loadChildren: './results/result-detail/result-detail.module#ResultDetailPageModule' },
   { path: '**', redirectTo: 'home' },
 ];
 

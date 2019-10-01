@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {catchError, finalize, map, take} from 'rxjs/operators';
-import {BehaviorSubject, from, Observable, of} from 'rxjs';
+import {catchError, finalize, map, retry, take} from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
 import {ToastController} from '@ionic/angular';
 
 @Injectable({
@@ -12,6 +12,8 @@ export class QuizService {
   // tslint:disable-next-line:variable-name
   private _quizItemList: any[];
   public loadingItems: BehaviorSubject<boolean>;
+  public loadingResults: BehaviorSubject<boolean>;
+
   // tslint:disable-next-line:variable-name
   private _quizOptions: any[];
   // tslint:disable-next-line:variable-name
@@ -20,6 +22,7 @@ export class QuizService {
 
   constructor(private afs: AngularFirestore, private toastCtrl: ToastController) {
     this.loadingItems = new BehaviorSubject<boolean>(false);
+    this.loadingResults = new BehaviorSubject<boolean>(false);
     this._quizOptions = [];
     this._quizItemList = [];
     this.progress = {};
@@ -96,6 +99,60 @@ export class QuizService {
 
   sendAnswers() {
     return this.afs.collection('reponded-quiz').add(this.progress);
+  }
+
+  getResults() {
+    this.loadingResults.next(true);
+    return this.afs.collection('reponded-quiz')
+        .get()
+        .pipe(
+            take(1),
+            map((response: any) => response.docs),
+            retry(3),
+            catchError(async (error: any) => {
+              console.log('load results error', error);
+              const toast = await this.toastCtrl.create({
+                header: 'Ocurrió un error al cargar los resultados',
+                message: 'Por favor, intenta de nuevo',
+                duration: 2000,
+                showCloseButton: true,
+                closeButtonText: 'Cerrar'
+              });
+              await toast.present();
+              return {};
+            }),
+            finalize(() => {
+              setTimeout(() => {
+                this.loadingResults.next(false);
+              }, 800);
+            })
+        );
+  }
+
+  getResult(id: string) {
+      return this.afs.collection('reponded-quiz')
+          .doc(id).valueChanges()
+          .pipe(
+              take(1),
+              retry(3),
+              catchError(async (error: any) => {
+                  console.log('load result error', error);
+                  const toast = await this.toastCtrl.create({
+                      header: 'Ocurrió un error al cargar el resultado',
+                      message: 'Por favor, intenta de nuevo',
+                      duration: 2000,
+                      showCloseButton: true,
+                      closeButtonText: 'Cerrar'
+                  });
+                  await toast.present();
+                  return {};
+              }),
+              finalize(() => {
+                  setTimeout(() => {
+                      this.loadingResults.next(false);
+                  }, 800);
+              })
+          );
   }
 
   public getSavedSession(): Promise<any> {

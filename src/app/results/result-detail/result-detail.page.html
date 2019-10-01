@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="toolbar-title">
+      <img src="/assets/img/logo.png" class="title-logo">
+      <span class="title-text">Resultado encuesta</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="result">
+    <ion-row>
+      <ion-col size="12" text-center>
+        <h2>Resultados</h2>
+        <table class="dpa-table">
+          <thead>
+            <tr>
+              <th>Tarjeta N.</th>
+              <th>Etapa 1</th>
+              <th>Etapa 2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of total">
+              <td>{{ item + 1 }}</td>
+              <td>{{ getPoints(item + 1, 1) }}</td>
+              <td>{{ getPoints(item + 1, 2) }}</td>
+            </tr>
+            <tr>
+              <td>Total</td>
+              <td>{{ getTotal(1) }}</td>
+              <td>{{ getTotal(2) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let step of [1, 2]">
+      <ion-col size="12" text-center><h2>Tabla {{step}}</h2></ion-col>
+      <ion-col size="12" offset="0" size-md="2" offset-md="1" text-center>
+        <ion-text color="">
+          <h3>Muy falso</h3>
+        </ion-text>
+        <ion-card *ngFor="let item of getCategory(1,step)" padding-horizontal text-left>
+          <p><strong>{{item.id}}.</strong> {{item.text}}</p>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-md="2" text-center>
+        <ion-text color="">
+          <h3>Falso</h3>
+        </ion-text>
+        <ion-card *ngFor="let item of getCategory(2,step)" padding-horizontal text-left>
+          <p><strong>{{item.id}}.</strong> {{item.text}}</p>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-md="2" text-center>
+        <ion-text color="">
+          <h3>Ni verdadero, ni falso</h3>
+        </ion-text>
+        <ion-card *ngFor="let item of getCategory(3,step)" padding-horizontal text-left>
+          <p><strong>{{item.id}}.</strong> {{item.text}}</p>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-md="2" text-center>
+        <ion-text color="">
+          <h3>Verdadero</h3>
+        </ion-text>
+        <ion-card *ngFor="let item of getCategory(4,step)" padding-horizontal text-left>
+          <p><strong>{{item.id}}.</strong> {{item.text}}</p>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-md="2" text-center>
+        <ion-text color="">
+          <h3>Muy verdadero</h3>
+        </ion-text>
+        <ion-card *ngFor="let item of getCategory(5,step)" padding-horizontal text-left>
+          <p><strong>{{item.id}}.</strong> {{item.text}}</p>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="toolbar-title">
+      <img src="/assets/img/logo.png" class="title-logo">
+      <span class="title-text">Resultados</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" offset="0"
+               size-md="8" offset-md="2"
+               size-xl="6" offset-xl="3"
+               padding>
+        <div class="question ion-padding-vertical" *ngFor="let item of results; let i = index;">
+          <div class="question-content">
+            <ion-text color="primary">
+              <a [routerLink]="['/results', 'detail', item.id]">Encuesta {{i + 1}}</a>
+            </ion-text>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
