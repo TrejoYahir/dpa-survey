@@ -104,10 +104,9 @@ export class QuizService {
   getResults() {
     this.loadingResults.next(true);
     return this.afs.collection('reponded-quiz')
-        .get()
+        .valueChanges({idField: 'id'})
         .pipe(
             take(1),
-            map((response: any) => response.docs),
             retry(3),
             catchError(async (error: any) => {
               console.log('load results error', error);

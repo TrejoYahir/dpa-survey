@@ -15,6 +15,8 @@ import { environment } from '../environments/environment';
 import {StepGuard} from './guards/step.guard';
 import {QuizService} from './services/quiz.service';
 import {AngularFireAuthModule} from '@angular/fire/auth';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 export function onInit(quizService: QuizService) {
   return () => quizService.getSavedSession();
@@ -25,7 +27,11 @@ export function onInit(quizService: QuizService) {
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      mode: 'ios',
+    }),
+    NgxChartsModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),

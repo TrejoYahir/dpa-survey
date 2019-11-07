@@ -8,7 +8,10 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid *ngIf="result">
+  <p *ngIf="!validResult" class="ion-text-center">
+    Los datos de esta encuesta se omitieron porque estaban incompletos.
+  </p>
+  <ion-grid *ngIf="result && validResult">
     <ion-row>
       <ion-col size="12" text-center>
         <h2>Resultados</h2>
@@ -16,20 +19,26 @@
           <thead>
             <tr>
               <th>Tarjeta N.</th>
+              <th>Texto</th>
               <th>Etapa 1</th>
               <th>Etapa 2</th>
+              <th>Diferencia</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let item of total">
               <td>{{ item + 1 }}</td>
+              <td>{{ getContent(item + 1) }}</td>
               <td>{{ getPoints(item + 1, 1) }}</td>
               <td>{{ getPoints(item + 1, 2) }}</td>
+              <td>{{ getDifference(item + 1) }}</td>
             </tr>
             <tr>
               <td>Total</td>
+              <td></td>
               <td>{{ getTotal(1) }}</td>
               <td>{{ getTotal(2) }}</td>
+              <td>{{ getTotal(2) - getTotal(1)}}</td>
             </tr>
           </tbody>
         </table>
