@@ -189,11 +189,11 @@
                   de temor.
                 </p>
                 <p class="ion-padding-bottom">
-                  <strong>Escala J – Traumatismo parental: </strong>
-                  evalúa si se
-                  percibió al entorno familiar durante la niñez
-                  como hostil y violento, generando sentimiento
-                  de temor.
+                  <strong>Escala K – Bloqueo de recuerdos: </strong>
+                  evalúa el
+                  grado de dificultad para reconocer, pensar
+                  y recordar la dinámica familiar durante la
+                  infancia.
                 </p>
                 <p class="ion-padding-bottom">
                   <strong>Escala L – Dimisión parental:  </strong>
@@ -241,7 +241,7 @@
         </ion-card>
       </ion-col>
     </ion-row>
-    <ion-row class="ion-justify-content-center ion-align-items-stretch">
+    <ion-row class="ion-justify-content-start ion-align-items-stretch">
       <ion-col size="12" size-md="6" size-xl="4" class="ion-no-padding" *ngFor="let item of results; let i = index;">
         <ion-card>
           <ion-card-header class="ion-no-padding ion-padding-horizontal ion-padding-top">
@@ -271,8 +271,22 @@
                       [showYAxisLabel]="true"
                       [yAxisLabel]="'Puntuación promedio'"
                       [showXAxisLabel]="true"
-                      [xAxisLabel]="'Escala'"
+                      [xAxisLabel]="'Correlaciones'"
                       [results]="item.graphProps.correlations"
+                      [yScaleMin]="0"
+                      [yScaleMax]="100"
+                      [legend]="false"></ngx-charts-bar-vertical>
+            </div>
+            <div class="graph-container survey-graph" *ngIf="item.valid">
+              <ngx-charts-bar-vertical
+                      [scheme]="'nightLights'"
+                      [xAxis]="true"
+                      [yAxis]="true"
+                      [showYAxisLabel]="true"
+                      [yAxisLabel]="'Puntuación promedio'"
+                      [showXAxisLabel]="true"
+                      [xAxisLabel]="'Escala'"
+                      [results]="item.graphProps.scales"
                       [yScaleMin]="0"
                       [yScaleMax]="100"
                       [legend]="false"></ngx-charts-bar-vertical>

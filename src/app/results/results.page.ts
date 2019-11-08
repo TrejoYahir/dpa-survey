@@ -87,12 +87,17 @@ export class ResultsPage implements OnInit, AfterViewInit {
         second: item['second-step'].map(x => x.answer.value)
       };
       stats.scaleProps = this.getScaleProps(stats.resultsArrays);
+      const scaleGraphProps = [];
+      for (const scale of scaleList) {
+        scaleGraphProps.push({name: scale, value: stats.scaleProps[scale].score});
+      }
       stats.graphProps = {
         correlations: [
           {name: 'Seguro', value: stats.scaleProps.safePercentage},
           {name: 'Evasivo', value: stats.scaleProps.evasivePercentage},
           {name: 'Preocupado', value: stats.scaleProps.worriedPercentage},
-        ]
+        ],
+        scales: scaleGraphProps
       };
       stats.valid = true;
     }
