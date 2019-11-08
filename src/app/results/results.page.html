@@ -10,14 +10,14 @@
 <ion-content>
   <ion-grid>
     <ion-row class="ion-justify-content-center">
-      <ion-col size="12" size-md="6" size-lg="4" *ngIf="differenceData">
+      <ion-col size="12" size-md="6" *ngIf="correlationAverages">
         <ion-card class="ion-no-margin ion-margin-top">
           <ion-card-header>
             <ion-card-title>
-              Movimientos grandes
+              Prototipo de ESCOM
             </ion-card-title>
             <ion-card-subtitle>
-              Cantidad de veces que un encuestado movió una tarjeta de un extremo a otro (Muy falso a muy verdadero o viceversa)
+              Pototipo de modelo de relación de apego de estudiantes de ESCOM basado en {{validResults?.length}} muestras
             </ion-card-subtitle>
           </ion-card-header>
           <ion-card-content class="ion-no-padding ion-padding-vertical">
@@ -27,22 +27,223 @@
                       [xAxis]="true"
                       [yAxis]="true"
                       [showYAxisLabel]="true"
-                      [yAxisLabel]="'Ocurrencias'"
+                      [yAxisLabel]="'Puntuación promedio'"
                       [showXAxisLabel]="true"
-                      [xAxisLabel]="'Cantidad de usuarios'"
-                      [results]="differenceData"
+                      [xAxisLabel]="'Correlaciones'"
+                      [results]="correlationAverages"
+                      [yScaleMin]="0"
+                      [yScaleMax]="100"
                       [legend]="false"></ngx-charts-bar-vertical>
             </div>
             <div class="ion-padding">
-              <p>Ej. {{differenceData[7]?.name}} usuarios movieron una tarjeta de extremo a extremo {{differenceData[7]?.value}} veces</p>
+              <ion-text color="dark">
+                <p class="ion-padding-bottom">
+                  <strong>Prototipo seguro/autónomo:</strong>
+                  Percibe a su familia
+                  actual como fuente de soporte, expresando
+                  aceptación, gratitud y perdón respecto a sus
+                  experiencias pasadas. Experimenta confianza
+                  en sí mismo y en otros, expresando sentimientos
+                  de manera abierta e involucrándose en
+                  relaciones cercanas con satisfacción.
+                </p>
+                <p class="ion-padding-bottom">
+                  <strong>Prototipo evasivo/desentendido:</strong>
+                  Sus memorias evocan
+                  situaciones de rechazo e indiferencia, por lo
+                  que expresa rechazo frente a sus relaciones
+                  pasadas. No confía en su familia actual y no
+                  se involucra en las relaciones, aludiendo
+                  autosuficiencia e independencia.
+                </p>
+                <p class="ion-padding-bottom">
+                  <strong>Prototipo preocupado:</strong>
+                  Los recuerdos de la
+                  infancia suelen aludir a situaciones de rechazo
+                  e interferencia por parte de los cuidadores.
+                  A pesar de ello, elogia los valores familiares.
+                  Presenta envolvimiento familiar, falta de
+                  autonomía, preocupación por la familia y
+                  temor a ser abandonado.
+                </p>
+                <p class="ion-padding-bottom">
+                  <small>
+                    <strong>Definiciones:</strong> <br>
+                    Nóblega, Magaly; Traverso, Pierina. <br>
+                    Confiabilidad y validez de constructo del autocuestionario de modelos internos de relaciones de apego adulto, CaMir
+                    <br>
+                    Pensamiento Psicológico, vol. 11, núm. 1, enero-junio, 2013, pp. 7-25 <br>
+                    Pontificia Universidad Javeriana <br>
+                    Cali, Colombia.
+                    <a href="https://www.redalyc.org/pdf/801/80127000008.pdf" target="_blank">Acceso en línea</a>
+                  </small>
+                </p>
+                <p class="ion-padding-bottom">
+                  <small>
+                    <strong>Procedimientos para análisis de resultados:</strong> <br>
+                    Balluerka, Lacasa, Gorostiaga, Muela, Pierrehumbert <br>
+                    Versión reducida del cuestionario CaMir (CaMir-R) para la evaluación
+                    del apego
+                    <br>
+                    Psicothema, vol. 23, núm. 3, 2011, pp. 486-494 <br>
+                    Hospital de Sant Joan de Déu <br>
+                    Barcelona, España.
+                    <a href="https://www.researchgate.net/publication/277264941_Version_reducida_del_cuestionario_Camir_Camir-R_para_la_evaluacion_del_apego"
+                       target="_blank">Acceso en línea</a>
+                  </small>
+                </p>
+              </ion-text>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-md="6" *ngIf="scalesAverages">
+        <ion-card class="ion-no-margin ion-margin-top">
+          <ion-card-header>
+            <ion-card-title>
+              Prototipo de ESCOM
+            </ion-card-title>
+            <ion-card-subtitle>
+              Pototipo de modelo de relación de apego de estudiantes de ESCOM basado en {{validResults?.length}} muestras
+            </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content class="ion-no-padding ion-padding-vertical">
+            <div class="graph-container">
+              <ngx-charts-bar-vertical
+                      [scheme]="'nightLights'"
+                      [xAxis]="true"
+                      [yAxis]="true"
+                      [showYAxisLabel]="true"
+                      [yAxisLabel]="'Puntuación promedio'"
+                      [showXAxisLabel]="true"
+                      [xAxisLabel]="'Escala'"
+                      [results]="scalesAverages"
+                      [yScaleMin]="0"
+                      [yScaleMax]="100"
+                      [legend]="false"></ngx-charts-bar-vertical>
+            </div>
+            <div class="ion-padding">
+              <ion-text color="dark">
+                <p class="ion-padding-bottom">
+                  <strong>Escala A – Interferencia parental: </strong>
+                  evalúa el grado en que se percibieron durante la niñez
+                  conductas de sobreprotección por parte de
+                  los cuidadores, lo que generó sentimientos
+                  de indefensión, falta de independencia e
+                  interferencia en el desarrollo de la autonomía.
+                </p>
+                <p class="ion-padding-bottom">
+                  <strong>Escala B – Preocupación familiar: </strong>
+                  evalúa el
+                  grado de preocupación actual en relación
+                  con el bienestar de sus familiares o entorno
+                  cercano, así como el nivel de malestar frente a
+                  la posibilidad de separación.
+                </p>
+                <p class="ion-padding-bottom">
+                  <strong>Escala C – Resentimiento de infantilización:</strong>
+                  evalúa el grado en que se percibió el entorno
+                  familiar como poco acogedor e inseguro,
+                  impidiendo el desarrollo de la autonomía.
+                </p>
+                <p class="ion-padding-bottom">
+                  <strong>Escala D –  Apoyo parental:</strong>
+                  Apoyo parental: evalúa el grado en
+                  que sintió a su familia de origen como fuente
+                  de soporte y seguridad en su niñez.
+                </p>
+                <p class="ion-padding-bottom">
+                  <strong>Escala E – Apoyo familiar: </strong>
+                  evalúa el grado
+                  en que se considera a la familia actual como
+                  fuente de soporte y seguridad.
+                </p>
+                <p class="ion-padding-bottom">
+                  <strong>Escala F – Reconocimiento de apoyo:</strong>
+                  evalúa
+                  el grado de satisfacción por las vivencias
+                  familiares durante la infancia y el grado de
+                  certeza de que podrá contar con ellos en caso
+                  que sea necesario.
+                </p>
+                <p class="ion-padding-bottom">
+                  <strong>Escala G – Indisponibilidad parental: </strong>
+                  evalúa
+                  el grado en que se percibió al entorno familiar
+                  como poco preocupados o negligentes,
+                  generando sentimientos de desapego hacia el
+                  entorno.
+                </p>
+                <p class="ion-padding-bottom">
+                  <strong>Escala I – Resentimiento de rechazo: </strong>
+                  evalúa si
+                  se percibieron durante la infancia actitudes de
+                  rechazo y abandono por parte de los padres,
+                  generando resentimiento.
+                </p>
+                <p class="ion-padding-bottom">
+                  <strong>Escala J – Traumatismo parental: </strong>
+                  evalúa si se
+                  percibió al entorno familiar durante la niñez
+                  como hostil y violento, generando sentimiento
+                  de temor.
+                </p>
+                <p class="ion-padding-bottom">
+                  <strong>Escala J – Traumatismo parental: </strong>
+                  evalúa si se
+                  percibió al entorno familiar durante la niñez
+                  como hostil y violento, generando sentimiento
+                  de temor.
+                </p>
+                <p class="ion-padding-bottom">
+                  <strong>Escala L – Dimisión parental:  </strong>
+                  evalúa si se
+                  percibió a los padres como permisivos y que
+                  no pudieron ejercer autoridad de manera
+                  adecuada durante la niñez.
+
+                </p>
+                <p class="ion-padding-bottom">
+                  <strong>Escala M – Valoración de la jerarquía: </strong>
+                  evalúa
+                  la valoración de los roles y las jerarquías
+                  dentro de la familia.
+                </p>
+                <p class="ion-padding-bottom">
+                  <small>
+                    <strong>Definiciones:</strong> <br>
+                    Nóblega, Magaly; Traverso, Pierina. <br>
+                    Confiabilidad y validez de constructo del autocuestionario de modelos internos de relaciones de apego adulto, CaMir
+                    <br>
+                    Pensamiento Psicológico, vol. 11, núm. 1, enero-junio, 2013, pp. 7-25 <br>
+                    Pontificia Universidad Javeriana <br>
+                    Cali, Colombia.
+                    <a href="https://www.redalyc.org/pdf/801/80127000008.pdf" target="_blank">Acceso en línea</a>
+                  </small>
+                </p>
+                <p class="ion-padding-bottom">
+                  <small>
+                    <strong>Procedimientos para análisis de resultados:</strong> <br>
+                    Balluerka, Lacasa, Gorostiaga, Muela, Pierrehumbert <br>
+                    Versión reducida del cuestionario CaMir (CaMir-R) para la evaluación
+                    del apego
+                    <br>
+                    Psicothema, vol. 23, núm. 3, 2011, pp. 486-494 <br>
+                    Hospital de Sant Joan de Déu <br>
+                    Barcelona, España.
+                    <a href="https://www.researchgate.net/publication/277264941_Version_reducida_del_cuestionario_Camir_Camir-R_para_la_evaluacion_del_apego"
+                       target="_blank">Acceso en línea</a>
+                  </small>
+                </p>
+              </ion-text>
             </div>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="12" size-md="6" size-xl="4" class="ion-no-padding">
-        <ion-card *ngFor="let item of results; let i = index;">
+    <ion-row class="ion-justify-content-center ion-align-items-stretch">
+      <ion-col size="12" size-md="6" size-xl="4" class="ion-no-padding" *ngFor="let item of results; let i = index;">
+        <ion-card>
           <ion-card-header class="ion-no-padding ion-padding-horizontal ion-padding-top">
             <ion-card-title>
               Encuesta {{i + 1}}
@@ -55,14 +256,27 @@
                 <p *ngIf="item.incomplete">
                   Incompleta
                 </p>
+                <p *ngIf="item.badProcedure">
+                  Mal procedimiento
+                </p>
               </ion-text>
             </ion-card-subtitle>
           </ion-card-header>
           <ion-card-content class="ion-no-padding ion-padding-horizontal ion-padding-bottom">
-            <ion-text color="dark" *ngIf="item.valid">
-              <p>Movimientos grandes: <strong>{{item.bigDifferences}}</strong></p>
-              <p>Puntaje: <strong>{{item.score | number:'1.2-2'}}</strong></p>
-            </ion-text>
+            <div class="graph-container survey-graph" *ngIf="item.valid">
+              <ngx-charts-bar-vertical
+                      [scheme]="'nightLights'"
+                      [xAxis]="true"
+                      [yAxis]="true"
+                      [showYAxisLabel]="true"
+                      [yAxisLabel]="'Puntuación promedio'"
+                      [showXAxisLabel]="true"
+                      [xAxisLabel]="'Escala'"
+                      [results]="item.graphProps.correlations"
+                      [yScaleMin]="0"
+                      [yScaleMax]="100"
+                      [legend]="false"></ngx-charts-bar-vertical>
+            </div>
             <ion-button shape="round" class="ion-margin-top"
                     [routerLink]="['/results', 'detail', item.id]" [routerDirection]="'forward'">
               Ver detalle
