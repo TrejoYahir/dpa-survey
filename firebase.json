@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "dpa-survey",
     "public": "www",
     "ignore": [
       "firebase.json",
